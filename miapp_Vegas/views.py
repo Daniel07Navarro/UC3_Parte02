@@ -110,6 +110,11 @@ footer = """
 lista = ['LP3','Dinamica de Sistemas','Ingeria de Requerimientos','Legislacion informatica'
 ,'Algoritmos de computacion grafica','Gestion de base de datos','Teoria general de sistemas']
 
+lista_estudiantes_lp3 = [
+    {'nombre': 'Vegas Villar Fernando', 'github': 'https://github.com/Thgear27/UC3_Parte01'},
+    {'nombre': 'Navarro Tantalean Daniel', 'github': 'https://github.com/Daniel07Navarro/UC3_Parte02'}
+]
+
 def home(request):
 	return HttpResponse(homehtml+footer)
 
@@ -136,6 +141,14 @@ def primos(request, a=1, b=100):
 			resultado += f"<li> {num} </li>"
 	resultado += "</ul>"
 	return HttpResponse(homehtml+resultado+footer)
+
+def examen(request):
+    # Crear una cadena HTML con la lista de estudiantes y enlaces a GitHub
+    estudiantes_html = "<h2>Lista de Estudiantes</h2><ul>"
+    for estudiante in lista_estudiantes_lp3:
+        estudiantes_html += f"<li>{estudiante['nombre']} - GitHub: <a href='{estudiante['github']}'>{estudiante['github']}</a></li>"
+    estudiantes_html += "</ul>"
+    return HttpResponse(homehtml + estudiantes_html + footer)
 
 
 def es_primo(num):
