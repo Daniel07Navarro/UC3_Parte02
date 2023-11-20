@@ -67,6 +67,7 @@ homehtml = """
 
     main {
       flex: auto;
+			margin: 0 auto;
     }
 
     footer {
@@ -88,19 +89,34 @@ homehtml = """
       <nav>
         <ul class="nav-inner">
           <li class="nav-item"><a href="/inicio">Inicio</a></li>
-          <li class="nav-item"><a href="/primos">Primos[a,b]</a></li>
+          <li class="nav-item"><a href="/primos/10/15">Primos[a,b]</a></li>
           <li class="nav-item"><a href="/examen">Examen</a></li>
         </ul>
       </nav>
     </header>
-    <main></main>
-    <footer>
+    <main>
+		
+    
+"""
+footer = """
+</main>
+<footer>
       <div class="content">UNTELS - LP3 - Vegas Navarro Ramon - 20/11/2023</div>
     </footer>
   </body>
 </html>
-
 """
 
+lista = ['LP3','Dinamica de Sistemas','Ingeria de Requerimientos','Legislacion informatica'
+,'Algoritmos de computacion grafica','Gestion de base de datos','Teoria general de sistemas']
+
 def home(request):
-  return HttpResponse(homehtml)
+	return HttpResponse(homehtml+footer)
+
+def mostrar_cursos(request):
+	# Crear una cadena HTML con la lista de materias
+	materias_html = "<h2>Lista de Materias</h2><ul>"
+	for materia in lista:
+		materias_html += f"<li>{materia}</li>"
+	materias_html += "</ul>"
+	return HttpResponse(homehtml+materias_html+footer)
