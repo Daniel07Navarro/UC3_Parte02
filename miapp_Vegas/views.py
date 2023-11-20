@@ -89,7 +89,7 @@ homehtml = """
       <nav>
         <ul class="nav-inner">
           <li class="nav-item"><a href="/inicio">Inicio</a></li>
-          <li class="nav-item"><a href="/primos/10/15">Primos[a,b]</a></li>
+          <li class="nav-item"><a href="/primos/15/10">Primos[a,b]</a></li>
           <li class="nav-item"><a href="/examen">Examen</a></li>
         </ul>
       </nav>
@@ -120,3 +120,28 @@ def mostrar_cursos(request):
 		materias_html += f"<li>{materia}</li>"
 	materias_html += "</ul>"
 	return HttpResponse(homehtml+materias_html+footer)
+
+def primos(request, a=1, b=100):
+	if a>b:
+		aux = a
+		a = b
+		b = aux
+	resultado = f"""
+	<h2> Números de [{a},{b}] </h2>
+	Resultado: <br>
+	<ul> 
+    """
+	for num in range(a, b + 1):
+		if es_primo(num):
+			resultado += f"<li> {num} </li>"
+	resultado += "</ul>"
+	return HttpResponse(homehtml+resultado+footer)
+
+
+def es_primo(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
